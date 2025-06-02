@@ -4,9 +4,9 @@ import axios from "axios";
 export const fetchFoodList = (page) => dispatch => {
     // 서버에서 데이터를 읽어서 => reducer로 전송
     axios.get('http://localhost/food/list_react', {
-            params: {
-                page: page
-            }
+        params: {
+            page: page
+        }
 
     }).then(res => {
         const action = {
@@ -34,3 +34,18 @@ export const fetchFoodDetail = (fno) => dispatch => {
     })
 
 }
+
+export const fetchFoodFind = (fd) => dispatch => {
+    axios.get('http://localhost:3355/food/find', {
+        params: {
+            fd: fd
+        }
+    }).then(res => {
+        dispatch({
+            type: FETCH_FOOD_FIND,
+            payload: res.data
+        })
+    }).catch(err => {
+        console.log(err)
+    })
+};

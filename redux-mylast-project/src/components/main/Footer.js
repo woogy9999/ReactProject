@@ -6,8 +6,7 @@ function Footer() {
     return (
         <Fragment>
 
-            <div id="wrapper">
-            <section id="footer">
+            <section id="footer" style={{textAlign:"center"}}>
                 <ul className="icons">
                     <li><a href="#" className="icon brands fa-twitter"><span className="label">Twitter</span></a></li>
                     <li><a href="#" className="icon brands fa-facebook-f"><span className="label">Facebook</span></a></li>
@@ -19,7 +18,7 @@ function Footer() {
                     2025 React 개인프로젝트: <a href="#">by - Woogy9999</a>
                 </p>
             </section>
-            </div>
+
 
         </Fragment>
 

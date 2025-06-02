@@ -2,6 +2,7 @@ import {useState,useEffect,Fragment} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate,useParams} from "react-router-dom";
 import {fetchFoodDetail} from "../../actions/foodActions";
+import FoodMap from "./FoodMap"
 // redirect , useRef , useCallback , useMemo
 // => history.back() Navigate
 
@@ -79,6 +80,12 @@ function FoodDetail() {
                                 <td className={"text-right"}>
                                     <button className={"btn-sm btn-danger"} onClick={listClick}>목록</button>
                                 </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <FoodMap address={foodDetail.address} name={foodDetail.name}/>
+                                </td>
+
                             </tr>
                             </tbody>
                         </table>

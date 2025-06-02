@@ -101,7 +101,7 @@ function FoodList() {
                                                     <a href="#"><i className="fa fa-heart-o" aria-hidden="true"></i> 10</a>
                                                 </div>
                                                 <div className="post-comments">
-                                                    <a href="#"><i className="fa fa-comment-o"
+                                                      <a href="#"><i className="fa fa-comment-o"
                                                                    aria-hidden="true"></i> 12</a>
                                                 </div>
                                                 <div className="post-share">

@@ -64,25 +64,21 @@ function Home() {
                 </section>
 
                 <div id="main">
-
+                    {mainData.list.slice(8,12).map((hotel) => (
                     <article className="post">
                         <header>
                             <div className="title">
-                                <h2><a href="single.html">Magna sed adipiscing</a></h2>
-                                <p>Lorem ipsum dolor amet nullam consequat etiam feugiat</p>
+                                <h2><a href="single.html">{hotel.title}</a></h2>
+                                <p>{hotel.address}</p>
                             </div>
                             <div className="meta">
-                                <time className="published" dateTime="2015-11-01">November 1, 2015</time>
+                                <time className="published" dateTime="2015-11-01">November 2025</time>
                                 <a href="#" className="author"><span className="name">Jane Doe</span><img
-                                    src="images/avatar.jpg" alt=""/></a>
+                                    src={hotel.poster} alt="" style={{width:"45px",height:"45px"}}/></a>
                             </div>
                         </header>
-                        <a href="single.html" className="image featured"><img src="images/pic01.jpg" alt=""/></a>
-                        <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem
-                            euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed
-                            ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae
-                            justo
-                            condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+                        <a href="single.html" className="image featured"><img src={hotel.poster} alt=""/></a>
+
                         <footer>
                             <ul className="actions">
                                 <li><a href="single.html" className="button large">Continue Reading</a></li>
@@ -94,73 +90,11 @@ function Home() {
                             </ul>
                         </footer>
                     </article>
+                        ))}
 
-                    <article className="post">
-                        <header>
-                            <div className="title">
-                                <h2><a href="single.html">Ultricies sed magna euismod enim vitae gravida</a></h2>
-                                <p>Lorem ipsum dolor amet nullam consequat etiam feugiat</p>
-                            </div>
-                            <div className="meta">
-                                <time className="published" dateTime="2015-10-25">October 25, 2015</time>
-                                <a href="#" className="author"><span className="name">Jane Doe</span><img
-                                    src="images/avatar.jpg" alt=""/></a>
-                            </div>
-                        </header>
-                        <a href="single.html" className="image featured"><img src="images/pic02.jpg" alt=""/></a>
-                        <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem
-                            euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed
-                            ultricies mi non congue ullam corper.</p>
-                        <footer>
-                            <ul className="actions">
-                                <li><a href="single.html" className="button large">Continue Reading</a></li>
-                            </ul>
-                            <ul className="stats">
-                                <li><a href="#">General</a></li>
-                                <li><a href="#" className="icon solid fa-heart">28</a></li>
-                                <li><a href="#" className="icon solid fa-comment">128</a></li>
-                            </ul>
-                        </footer>
-                    </article>
-
-                    <article className="post">
-                        <header>
-                            <div className="title">
-                                <h2><a href="single.html">Euismod et accumsan</a></h2>
-                                <p>Lorem ipsum dolor amet nullam consequat etiam feugiat</p>
-                            </div>
-                            <div className="meta">
-                                <time className="published" dateTime="2015-10-22">October 22, 2015</time>
-                                <a href="#" className="author"><span className="name">Jane Doe</span><img
-                                    src="images/avatar.jpg" alt=""/></a>
-                            </div>
-                        </header>
-                        <a href="single.html" className="image featured"><img src="images/pic03.jpg" alt=""/></a>
-                        <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem
-                            euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed
-                            ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae
-                            justo
-                            condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla. Cras vehicula
-                            tellus eu ligula viverra, ac fringilla turpis suscipit. Quisque vestibulum rhoncus
-                            ligula.</p>
-                        <footer>
-                            <ul className="actions">
-                                <li><a href="single.html" className="button large">Continue Reading</a></li>
-                            </ul>
-                            <ul className="stats">
-                                <li><a href="#">General</a></li>
-                                <li><a href="#" className="icon solid fa-heart">28</a></li>
-                                <li><a href="#" className="icon solid fa-comment">128</a></li>
-                            </ul>
-                        </footer>
-                    </article>
 
                     {/* 이부분에 들어있었음 */}
 
-                    <ul className="actions pagination">
-                        <li><a href="" className="disabled button large previous">Previous Page</a></li>
-                        <li><a href="#" className="button large next">Next Page</a></li>
-                    </ul>
 
                 </div>
 
@@ -169,19 +103,19 @@ function Home() {
                     <section id="intro">
                         <a href="#" className="logo"><img src="images/logo.jpg" alt=""/></a>
                         <header>
-                            <h2>Future Imperfect</h2>
-                            <p>Another fine responsive site template by <a href="http://html5up.net">HTML5 UP</a></p>
+                            <h2>추천 호텔 리스트</h2>
+                            <p>호텔에서 누리는 재충전의 시간<br/>   내 마음에 드는 숙소에서 다같이 머물러 보세요</p>
                         </header>
                     </section>
 
                     <section>
                         <div className="mini-posts">
-                            {mainData.list.map((hotel) => (
+                            {mainData.list.slice(0,4).map((hotel) => (
                                 <article className="mini-post">
                                     <header>
                                         <h3><a href="single.html">{hotel.title}</a></h3>
-                                        <time className="published" dateTime="2015-10-20">{hotel.address}</time>
-                                        <a href="#" className="author"><img src={hotel.poster} alt=""/></a>
+                                        <p>{hotel.address}</p>
+                                        <a href="#" className="author"><img src={hotel.poster} style={{width:"45px",height:"45px"}}/></a>
                                     </header>
                                     <a href="single.html" className="image"><img src={hotel.poster} alt=""/></a>
                                 </article>
@@ -192,51 +126,19 @@ function Home() {
 
                     <section>
                         <ul className="posts">
+
+                            {mainData.list.slice(4,8).map((hotel) => (
                             <li>
                                 <article>
                                     <header>
-                                        <h3><a href="single.html">Lorem ipsum fermentum ut nisl vitae</a></h3>
-                                        <time className="published" dateTime="2015-10-20">October 20, 2015</time>
+                                        <h3><a href="single.html">{hotel.title}</a></h3>
+                                        <time className="published" dateTime="2015-10-20">{hotel.address}</time>
                                     </header>
-                                    <a href="single.html" className="image"><img src="images/pic08.jpg" alt=""/></a>
+                                    <a href="single.html" className="image"><img src={hotel.poster} style={{width:"70px",height:"70px"}}/></a>
                                 </article>
                             </li>
-                            <li>
-                                <article>
-                                    <header>
-                                        <h3><a href="single.html">Convallis maximus nisl mattis nunc id lorem</a></h3>
-                                        <time className="published" dateTime="2015-10-15">October 15, 2015</time>
-                                    </header>
-                                    <a href="single.html" className="image"><img src="images/pic09.jpg" alt=""/></a>
-                                </article>
-                            </li>
-                            <li>
-                                <article>
-                                    <header>
-                                        <h3><a href="single.html">Euismod amet placerat vivamus porttitor</a></h3>
-                                        <time className="published" dateTime="2015-10-10">October 10, 2015</time>
-                                    </header>
-                                    <a href="single.html" className="image"><img src="images/pic10.jpg" alt=""/></a>
-                                </article>
-                            </li>
-                            <li>
-                                <article>
-                                    <header>
-                                        <h3><a href="single.html">Magna enim accumsan tortor cursus ultricies</a></h3>
-                                        <time className="published" dateTime="2015-10-08">October 8, 2015</time>
-                                    </header>
-                                    <a href="single.html" className="image"><img src="images/pic11.jpg" alt=""/></a>
-                                </article>
-                            </li>
-                            <li>
-                                <article>
-                                    <header>
-                                        <h3><a href="single.html">Congue ullam corper lorem ipsum dolor</a></h3>
-                                        <time className="published" dateTime="2015-10-06">October 7, 2015</time>
-                                    </header>
-                                    <a href="single.html" className="image"><img src="images/pic12.jpg" alt=""/></a>
-                                </article>
-                            </li>
+                            ))}
+
                         </ul>
                     </section>
 

@@ -1,8 +1,9 @@
-import {FETCH_HOTEL_LIST} from "../actions/types"
+import {FETCH_HOTEL_DETAIL, FETCH_HOTEL_LIST,FETCH_HOTEL_FIND} from "../actions/types"
 
 // Map => {} , VO|Entity => {} , List =>[]
-const foodState={
+const hotelState={
     hotel_list:{},
+    hotel_find:[]
 }
 
 export default function(state = hotelState, action){
@@ -10,7 +11,17 @@ export default function(state = hotelState, action){
         case FETCH_HOTEL_LIST:
             return {
                 ...state,
-                food_list:action.payload
+                hotel_list:action.payload
+            }
+        case FETCH_HOTEL_DETAIL:
+            return {
+                ...state,
+                hotel_detail:action.payload
+            }
+        case FETCH_HOTEL_FIND:
+            return {
+                ...state,
+                hotel_find:action.payload
             }
         default:
             return state;
