@@ -1,8 +1,7 @@
 import {useEffect, useState, useRef, Fragment} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import {useMutation, useQuery} from "@tanstack/react-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import apiClient from "../../http-commons";
-import {AxiosError, AxiosResponse} from "axios";
 
 interface BoardDetailData {
     no: number;
@@ -15,6 +14,7 @@ interface BoardDetailData {
 
 function BoardUpdate() {
     const {no} = useParams<{ no: string }>();
+    const queryClient = useQueryClient();
     const nav = useNavigate();
 
     const nameRef = useRef<HTMLInputElement>(null);
@@ -28,8 +28,8 @@ function BoardUpdate() {
     const [pwd, setPwd] = useState<string>("");
 
     const { data } = useQuery<BoardDetailData>({
-        queryKey: ["board-detail", no],
-        queryFn: async () => (await apiClient.get(`/board/detail/${no}?increase=false`)).data,
+        queryKey: ["board-update", no],
+        queryFn: async () => (await apiClient.get(`/board/update/${no}`)).data,
     });
 
     useEffect(() => {
@@ -41,7 +41,6 @@ function BoardUpdate() {
     }, [data]);
 
 
-    // 수정
     const {mutate: updateBoard} = useMutation({
         mutationFn: async () => {
             return await apiClient.put(`/board/update_ok/${no}?increase=false`, {
@@ -53,8 +52,10 @@ function BoardUpdate() {
                 pwd,
             });
         },
-        onSuccess: (res:AxiosResponse) => {
+        onSuccess: (res) => {
             if (res.data.msg === "yes") {
+
+                queryClient.invalidateQueries({ queryKey: ["board-detail", no] });
                 nav(`/board/detail/${no}?increase=false`);
             } else {
                 alert("비밀번호가 틀립니다");
@@ -62,7 +63,7 @@ function BoardUpdate() {
                 pwdRef.current?.focus();
             }
         },
-        onError: (err:AxiosError) => {
+        onError: (err) => {
             console.error(err);
         },
     });
@@ -86,15 +87,26 @@ function BoardUpdate() {
         }
         updateBoard();
     };
+
     const cancel = () => {
         nav(`/board/detail/${no}?increase=false`);
     };
 
     return (
         <Fragment>
+            <div className="breadcumb-area" style={{backgroundImage: "url(/img/bg-img/breadcumb.jpg)"}} >
+                <div className="container h-100">
+                    <div className="row h-100 align-items-center">
+                        <div className="col-12">
+                            <div className="bradcumb-title text-center">
+                                <h2>수정하기</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <section className="archive-area section_padding_80">
                 <div className="container">
-                    <h3 className="text-center">수정하기</h3>
                     <div className="row">
                         <div className="col-10">
                             <table className="table">
