@@ -1,5 +1,31 @@
 import { useEffect, Fragment } from "react";
-
+import {useQuery} from "@tanstack/react-query";
+import apiClient from "../../http-commons";
+import {Link} from "react-router-dom";
+/*
+"no": 2,
+      "goods_discount": 31,
+      "hit": 4,
+      "likecount": 0,
+      "replycount": 0,
+      "goods_name": "[만개특가] 영양간식 스트롱숏다리 1봉 20-32미(250g)",
+      "goods_sub": "씹고 뜯고 맛보고 즐기고! 스트롱 숏다리",
+      "goods_price": "8,900원",
+      "goods_first_price": "8,455원",
+      "goods_delivery": "무료배송",
+      "goods_poster": "https://recipe1.ezmember.co.kr/cache/data/goods/21/07/28/1000021160/1000021160_detail_042.jpg",
+      "num": 0
+ */
+interface MainData{
+    list1:{
+        no: number;
+        poster: string;
+        goods_name: string;
+        goods_sub: string;
+        goods_poster:string;
+        num: number;
+    }[];
+}
 function Home() {
     useEffect(() => {
         const script = document.createElement("script");
@@ -11,6 +37,17 @@ function Home() {
             document.body.removeChild(script);
         };
     }, []);
+
+    const {isLoading,isError,error,data}=useQuery<{data:MainData},Error>({
+        queryKey:["main-data"],
+        queryFn:async () => await apiClient.get("/main")
+    })
+
+    console.log(data?.data);
+
+
+
+
     return (
         <Fragment>
             <div className="owl-carousel owl-carousel1 owl-carousel-fullwidth fh5co-light-arrow animate-box"
@@ -21,45 +58,40 @@ function Home() {
                     <img src="images/featured-2.jpg" alt="image"/></a></div>
             </div>
 
-            <div id="fh5co-intro-section">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-12 text-center">
-                            <h2>We Create Cool Things For The Better Web.</h2>
-                            <p>Made with love by the fine folks at <a href="http://freehtml5.co">FreeHTML5.co</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="fh5co-common-section">
+
+
+
+
+
+
+            <div id="fh5co-blog-section">
                 <div className="container">
                     <div className="heading-section text-center">
-                        <h2>Who we are</h2>
+                        <h2>서울 자연</h2>
                     </div>
                     <div className="row">
-                        <div className="col-md-10 col-md-offset-1">
-                            <div className="col-md-6 col-sm-6 services-num services-num-text-right">
-                                <span className="number-holder">01</span>
-                                <div className="desc">
-                                    <h3>Countries Vokalia and Consonantia</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                        Consonantia, there live the blind texts.</p>
-                                </div>
-                            </div>
-                            <div className="col-md-6 col-sm-6 services-num">
-                                <span className="number-holder">02</span>
-                                <div className="desc">
-                                    <h3>Countries Vokalia and Consonantia</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia and
-                                        Consonantia, there live the blind texts.</p>
-                                </div>
-                            </div>
+                        {
+                        data?.data.list1.map((goods, index:number) => (
+
+
+                        <div className="col-md-4 blog-section">
+                            <span>0{index+1} <small>June 2025</small></span>
+                            <Link to={`/goods/detail/${goods.no}`}><img src={goods.goods_poster} alt="Work" style={{width:"340px",height:"260px"}}/></Link>
+                                <h3><Link to={`/goods/detail/${goods.no}`}>{goods.goods_name}</Link></h3>
+
                         </div>
+
+                        ))
+                        }
                     </div>
                 </div>
             </div>
+
+
+
+
             <div className="fh5co-parallax"
-                 style={{ backgroundImage: 'url(images/hero-1.jpg)' }}
+                 style={{backgroundImage: 'url(../images/hero-1.jpg)', height: "300px"}}
                  data-stellar-background-ratio="0.5">
                 <div className="overlay"></div>
                 <div className="container">
@@ -67,104 +99,19 @@ function Home() {
                         <div
                             className="col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-center fh5co-table">
                             <div className="fh5co-intro fh5co-table-cell">
-                                <h1 className="text-center">Create more Themes</h1>
-                                <p>Made with love by the fine folks at <a href="http://freehtml5.co">FreeHTML5.co</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="fh5co-services-section">
-                <div className="container">
-                    <div className="heading-section text-center">
-                        <h2>Our Services</h2>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-4 col-sm-6">
-                            <div className="fh5co-services-right">
-                                <div className="fh5co-table2 text-center">
-                                    <div className="fh5co-table-cell2">
-                                        <i className="icon-heart3"></i>
-                                    </div>
-                                </div>
-                                <div className="holder-section">
-                                    <h3>Crafted With Love</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia </p>
-                                </div>
-                            </div>
-                            <div className="fh5co-services-right">
-                                <div className="fh5co-table2 fh5co-table2-color-2 text-center">
-                                    <div className="fh5co-table-cell2">
-                                        <i className="icon-laptop"></i>
-                                    </div>
-                                </div>
-                                <div className="holder-section">
-                                    <h3>Web Design</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia </p>
-                                </div>
-                            </div>
-                            <div className="fh5co-services-right">
-                                <div className="fh5co-table2 fh5co-table2-color-3 text-center">
-                                    <div className="fh5co-table-cell2">
-                                        <i className="icon-video"></i>
-                                    </div>
-                                </div>
-                                <div className="holder-section">
-                                    <h3>Video Editing</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-md-4 text-center">
-                            <div className="fhco-hero2">
-                                <img className="img-responsive" src="images/iphone6.png" alt="iphone6"/>
-                            </div>
-                        </div>
-
-                        <div className="col-md-4 col-sm-6">
-                            <div className="fh5co-services">
-                                <div className="fh5co-table2 fh5co-table2-color-4 text-center">
-                                    <div className="fh5co-table-cell2">
-                                        <i className="icon-mobile"></i>
-                                    </div>
-                                </div>
-                                <div className="holder-section">
-                                    <h3>Mobile Optimization</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia </p>
-                                </div>
-                            </div>
-                            <div className="fh5co-services">
-                                <div className="fh5co-table2 fh5co-table2-color-5 text-center">
-                                    <div className="fh5co-table-cell2">
-                                        <i className="icon-gears"></i>
-                                    </div>
-                                </div>
-                                <div className="holder-section">
-                                    <h3>SEO</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia </p>
-                                </div>
-                            </div>
-                            <div className="fh5co-services">
-                                <div className="fh5co-table2 fh5co-table2-color-6 text-center">
-                                    <div className="fh5co-table-cell2">
-                                        <i className="icon-piechart"></i>
-                                    </div>
-                                </div>
-                                <div className="holder-section">
-                                    <h3>Web Analytic</h3>
-                                    <p>Far far away, behind the word mountains, far from the countries Vokalia </p>
+                                <div className="text-center" style={{height: "300px"}}>
+                                    <h1>추천 장소</h1>
+                                    <p className="text-center" style={{height: "300px"}}>선택하여 상세 페이지로 이동하세요</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div id="fh5co-featured-work-section">
                 <div className="container-fluid">
                     <div className="heading-section text-center">
-                        <h2>Our Projects</h2>
                     </div>
                     <div className="owl-carousel owl-carousel2">
                         <div className="item">
@@ -251,52 +198,8 @@ function Home() {
                     </div>
                 </div>
             </div>
-            <div id="fh5co-blog-section">
-                <div className="container">
-                    <div className="heading-section text-center">
-                        <h2>Recent Blog</h2>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-4 blog-section">
-                            <span>03 <small>July 2016</small></span>
-                            <h3><a href="#">Mourntains countries Vokalia</a></h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia, there live the
-                                blind texts.</p>
-                            <a className="btn btn-primary" href="#">Read More</a>
-                        </div>
-                        <div className="col-md-4 blog-section">
-                            <span>02 <small>July 2016</small></span>
-                            <h3><a href="#">Mourntains countries Vokalia</a></h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia, there live the
-                                blind texts.</p>
-                            <a className="btn btn-primary" href="#">Read More</a>
-                        </div>
-                        <div className="col-md-4 blog-section">
-                            <span>01 <small>July 2016</small></span>
-                            <h3><a href="#">Mourntains countries Vokalia</a></h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia, there live the
-                                blind texts.</p>
-                            <a className="btn btn-primary" href="#">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="fh5co-parallax" style={{ backgroundImage: 'url(images/hero-2.jpg)' }}
-                 data-stellar-background-ratio="0.5">
-                <div className="overlay"></div>
-                <div className="container">
-                    <div className="row">
-                        <div
-                            className="col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-center fh5co-table">
-                            <div className="fh5co-intro fh5co-table-cell">
-                                <h1 className="text-center">Less is more</h1>
-                                <p>Made with love by the fine folks at <a href="http://freehtml5.co">FreeHTML5.co</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
 
 
         </Fragment>
